@@ -1,0 +1,56 @@
+<p-toast></p-toast>
+
+<div class="container">
+
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+              <h1>Cadastrar Partida</h1>
+            </div>
+
+
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Campeonato</label>
+               <p-dropdown [options]="campeonatos"
+                 [(ngModel)]="partida.campeonato.id"
+                 placeholder="Selecione o Campeonato"
+                 name="campeonato"
+                 #campeonato="ngModel" required type=Campeonato>
+                 <div *ngIf="campeonato.hasError('required')"></div>
+              </p-dropdown>
+
+            </div>
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+              <label>Time 1 </label>
+                <p-dropdown [options]="times"
+                  [(ngModel)]="partida.time1.id"
+                  placeholder="Selecione um Time"
+                  name="time1"
+                  #time1="ngModel" required type=Time>
+                  <div *ngIf="time1.hasError('required')"></div>
+               </p-dropdown>
+             </div>
+
+             <div class="ui-g-12 ui-md-9 ui-fluid">
+              <label>Time 2 </label>
+                <p-dropdown [options]="times"
+                  [(ngModel)]="partida.time2.id"
+                  placeholder="Selecione um Time"
+                  name="time2"
+                  #time2="ngModel" required type=Time>
+                  <div *ngIf="time2.hasError('required')"></div>
+               </p-dropdown>
+             </div>
+
+
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Salvar" [disabled]="f.invalid" class=" boxButton"></button>
+
+            </div>
+        </div>
+    </form>
+
+</div>

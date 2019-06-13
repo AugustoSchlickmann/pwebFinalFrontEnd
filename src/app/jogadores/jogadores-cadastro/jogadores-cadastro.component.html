@@ -1,0 +1,58 @@
+<p-toast></p-toast>
+
+<div class="container">
+
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+              <h1>Cadastrar Jogador</h1>
+            </div>
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Nome</label>
+                <input pInputText type="text" name="nome" [(ngModel)]="jogador.nome" #nome="ngModel" required minlength="3">
+                <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
+                <div *ngIf="nome.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
+            </div>
+
+          <div class="ui-g-12 ui-md-9 ui-fluid">
+            <label>Número da Camisa</label>
+            <input pInputText type="text" name="camisa" [(ngModel)]="jogador.camisa"
+            #camisa="ngModel" required type="number">
+            <div *ngIf="camisa.hasError('required') && camisa.touched">Informe a Camisa</div>
+
+         </div>
+
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Posição</label>
+               <p-dropdown [options]="posicoes"
+                 [(ngModel)]="jogador.posicao"
+                 placeholder="Selecione uma Posição"
+                 name="posicao"
+                 #posicao="ngModel" required type=Posição>
+                 <div *ngIf="posicao.hasError('required')"></div>
+              </p-dropdown>
+
+            </div>
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+              <label>Time</label>
+                <p-dropdown [options]="times"
+                  [(ngModel)]="jogador.time.id"
+                  placeholder="Selecione um Time"
+                  name="time"
+                  #time="ngModel" required type=Time>
+                  <div *ngIf="time.hasError('required')"></div>
+               </p-dropdown>
+             </div>
+
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Salvar" [disabled]="f.invalid" class=" boxButton"></button>
+
+            </div>
+        </div>
+    </form>
+
+</div>
