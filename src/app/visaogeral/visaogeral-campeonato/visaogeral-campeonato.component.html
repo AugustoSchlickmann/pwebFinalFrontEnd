@@ -19,8 +19,8 @@
      [(ngModel)]="Campeonato"
      placeholder="Selecione o Campeonato"
      name="campeonato"
-     #partida="ngModel" required type=Campeonato
-     onClick="">
+     #partida="ngModel"
+     onclick=''>
    </p-dropdown>
    <div class="ui-g-12">
    <button pButton type="submit" label="Ir "></button>
@@ -33,7 +33,7 @@
 
 
       <div class="ui-g-12">
-          <p-table [value]="partidas" [paginator]="true" [rows]="5" [responsive]="true">
+          <p-table [value]="partidas" [paginator]="true" [rows]="10" [responsive]="true">
               <ng-template pTemplate="header" >
                   <tr>
                     <th>Partidas</th>

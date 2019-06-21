@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 <div class="container">
 
   <div class="ui-g">
@@ -20,7 +20,7 @@
      placeholder="Selecione o Campeonato"
      name="campeonato"
      #partida="ngModel" required type=Campeonato
-     onClick="">
+     onclick="">
    </p-dropdown>
    <div class="ui-g-12">
    <button pButton type="submit" label="Ir "></button>
@@ -38,27 +38,30 @@
      placeholder="Selecione a Partida"
      name="partida"
      #partida="ngModel" required type=Partida
-     onClick=""
+     onsubmit=""
      [filter]="true">
    </p-dropdown>
    <div class="ui-g-12">
    <button pButton type="submit" label="Ir "></button>
   </div>
    </div>
-
 </form>
 
 
 <div class="ui-g-4 ">
     <h1>Placar {{Partida==null? '': Partida.placar }}</h1>
     <h1></h1>
+    <form autocomplete="off" (ngSubmit)="zerarPlacar(Partida)">
+      <button pButton type="submit" label="Zerar Placar "></button>
+      </form>
 </div>
 
       <div class="ui-g-6">
           <p-table [value]="jogadoresTime1" [paginator]="true" [rows]="5" [responsive]="true">
               <ng-template pTemplate="header" >
                   <tr>
-                    <th>Jogadores Time 1</th>
+                    <th>{{Partida==null? 'Jogadores' : 'Jogadores ' + Partida.time1.nome}} </th>
+                    <th>Posição</th>
                     <th>Adicionar Gols</th>
                   </tr>
                </ng-template>
@@ -66,6 +69,7 @@
                <ng-template pTemplate="body" let-j1>
                   <tr>
                     <td>{{j1.nome}}</td>
+                    <td>{{j1.posicao}}</td>
                    <td>
                       <button pButton icon="pi pi-plus" (click)="inserir(j1, Partida)"></button>
                   </td>
@@ -81,7 +85,8 @@
 
           <ng-template pTemplate="header" >
                 <tr>
-                  <th>Jogadores Time 2</th>
+                  <th>{{Partida==null? 'Jogadores' : 'Jogadores '+ Partida.time2.nome}}</th>
+                  <th>Posição</th>
                   <th>Adicionar Gols</th>
                 </tr>
              </ng-template>
@@ -89,6 +94,7 @@
              <ng-template pTemplate="body" let-j2>
                 <tr>
                   <td>{{j2.nome}}</td>
+                  <td>{{j2.posicao}}</td>
                   <td>
                     <button pButton icon="pi pi-plus" (click)="inserir(j2, Partida)"></button>
                   </td>

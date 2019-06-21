@@ -2,7 +2,6 @@ import { VisaogeralService } from './../visaogeral.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-visaogeral-campeonato',
@@ -13,7 +12,6 @@ export class VisaogeralCampeonatoComponent implements OnInit {
 
   partidas=[];
   campeonatos = [];
-  placares=[];
 
   constructor(
     private service: VisaogeralService,

@@ -1,0 +1,95 @@
+<p-toast></p-toast>
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+<div class="container">
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>
+        Exclusão de Gols
+      </h1>
+
+   </div>
+
+
+
+<form autocomplete="off" (ngSubmit)="pesquisarPartidas(Campeonato.id)">
+  <div class="ui-g-6 ui-md-9 ui-fluid">
+    <label>Campeonato</label>
+   <p-dropdown [options]="campeonatos"
+     [(ngModel)]="Campeonato"
+     placeholder="Selecione o Campeonato"
+     name="campeonato"
+     #partida="ngModel" required type=Campeonato
+     onClick="">
+   </p-dropdown>
+   <div class="ui-g-12">
+   <button pButton type="submit" label="Ir "></button>
+  </div>
+   </div>
+
+</form>
+
+
+<form autocomplete="off" (ngSubmit)="listarGols(Partida)">
+  <div class="ui-g-6 ui-md-9 ui-fluid">
+    <label>Partida</label>
+   <p-dropdown [options]="partidas"
+     [(ngModel)]="Partida"
+     placeholder="Selecione a Partida"
+     name="partida"
+     #partida="ngModel" required type=Partida
+     onClick=""
+     [filter]="true">
+   </p-dropdown>
+   <div class="ui-g-12">
+   <button pButton type="submit" label="Ir "></button>
+  </div>
+   </div>
+
+</form>
+
+
+<div class="ui-g-4 ">
+  <h1>Placar {{Partida==null? '': Partida.placar }}</h1>
+    <h1></h1>
+</div>
+
+      <div class="ui-g-6">
+          <p-table [value]="golsDaPartida" [paginator]="true" [rows]="5" [responsive]="true">
+              <ng-template pTemplate="header" >
+                  <tr>
+                    <th>Jogadores </th>
+                    <th>Nome do Time </th>
+                    <th>Excluir Gols</th>
+                  </tr>
+               </ng-template>
+
+               <ng-template pTemplate="body" let-gol>
+                  <tr>
+                    <td>{{gol.jogador.nome}}</td>
+                    <td>{{gol.jogador.time.nome}}</td>
+                   <td>
+                      <button pButton icon="pi pi-trash" (click)="confirmarExclusao(gol,Partida)"></button>
+
+                  </td>
+                  </tr>
+                </ng-template>
+
+          </p-table>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+    div.ui-g-12{ text-align: center}
+    div.ui-g-6{text-align:center}
+    div.ui-g-4{text-align:center}
+    </style>

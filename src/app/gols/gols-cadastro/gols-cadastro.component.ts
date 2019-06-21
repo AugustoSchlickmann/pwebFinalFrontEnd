@@ -4,8 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { GolsService } from './../gols.service';
 import { Gols } from './../model';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { Partida } from 'src/app/partidas/model';
+import { PartidasCadastroComponent } from 'src/app/partidas/partidas-cadastro/partidas-cadastro.component';
+
 
 
 @Component({
@@ -26,7 +28,7 @@ export class GolsCadastroComponent implements OnInit {
   constructor(
     private service: GolsService,
     private messageService: MessageService,
-    private rota: ActivatedRoute
+    private conf: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -55,17 +57,7 @@ export class GolsCadastroComponent implements OnInit {
 
   }
 
-
-  pesquisarPartidas(id_campeonato:number){
-
-    this.service.listarPartidaCampeonato(id_campeonato)
-    .then((dados)=>{
-      this.partidas=dados
-      .map(p => ({ label: p.time1.nome+' X ' +p.time2.nome, value: p}));
-    });
-  }
-
-  pesquisarJogadoresTime(partida:Partida){
+    pesquisarJogadoresTime(partida:Partida){
     this.service.listarJogadoresTime(partida.time1.id)
     .then((dados)=>{
       this.jogadoresTime1=dados;
@@ -76,6 +68,15 @@ export class GolsCadastroComponent implements OnInit {
 
       this.atualizaPlacar(partida);
 
+    });
+  }
+
+  pesquisarPartidas(id_campeonato:number){
+
+    this.service.listarPartidaCampeonato(id_campeonato)
+    .then((dados)=>{
+      this.partidas=dados
+      .map(p => ({ label: p.time1.nome+' X ' +p.time2.nome, value: p}));
     });
   }
 
@@ -102,6 +103,40 @@ export class GolsCadastroComponent implements OnInit {
     }
 
     }
+
+
+    zerarPlacar(partida:Partida){
+      if(partida.placar.endsWith('r')){
+        this.conf.confirm({
+          message: 'Partida terminou em 0 X 0 ?',
+          accept: () => {
+            this.golsTime1=0;
+            this.golsTime2=0;
+            partida.placar=this.golsTime1+' X '+this.golsTime2;
+            this.service.alterarPlacar(partida);
+          }
+        });
+
+      }else{
+        if(partida.placar.endsWith('0 X 0')){
+          this.messageService.add({ severity: 'warn', detail: 'Partida já está zerada' });
+        }else{
+          this.messageService.add({ severity: 'error', detail: 'Exclua os gols da Partida nas opções de excluir gols' });
+        }
+      }
+
+     }
+
+     contemGol(partida:Partida){
+
+          var x = partida.placar.split('X')
+          if( (parseInt(x[0]) + parseInt(x[1])) > 0){
+            return true
+          }else{
+            return false
+          }
+        }
+
 
 
 

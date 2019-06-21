@@ -31,7 +31,9 @@
                  [(ngModel)]="jogador.posicao"
                  placeholder="Selecione uma Posição"
                  name="posicao"
-                 #posicao="ngModel" required type=Posição>
+                 #posicao="ngModel"
+                 required
+                 type=Posição>
                  <div *ngIf="posicao.hasError('required')"></div>
               </p-dropdown>
 
@@ -43,7 +45,9 @@
                   [(ngModel)]="jogador.time.id"
                   placeholder="Selecione um Time"
                   name="time"
-                  #time="ngModel" required type=Time>
+                  required
+                  #time="ngModel"
+                  type=Time>
                   <div *ngIf="time.hasError('required')"></div>
                </p-dropdown>
              </div>

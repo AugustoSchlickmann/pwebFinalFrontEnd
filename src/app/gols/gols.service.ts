@@ -32,9 +32,11 @@ export class GolsService {
     return this.http.get<any>('http://localhost:8080/times/'+id+'/jogadores').toPromise();
   }
 
-  listarPlacar(id:number){
+  listarGolsDaPartida(id:number){
     return this.http.get<any>('http://localhost:8080/partidas/'+id+'/gols').toPromise();
   }
+
+
 
   excluir(id:number):Promise<void>{
     return this.http.delete(this.golsURL+'/'+id)

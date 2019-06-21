@@ -9,9 +9,11 @@ import { GolsCadastroComponent } from './gols-cadastro/gols-cadastro.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { MessageService } from 'primeng/api';
 import {TableModule} from 'primeng/table';
+import { GolsExcluirComponent } from './gols-excluir/gols-excluir.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
-  declarations: [GolsCadastroComponent],
+  declarations: [GolsCadastroComponent, GolsExcluirComponent],
   imports: [
     CommonModule,
     DropdownModule,
@@ -19,14 +21,16 @@ import {TableModule} from 'primeng/table';
     ButtonModule,
     InputTextModule,
     FormsModule,
-    TableModule
+    TableModule,
+    ConfirmDialogModule
   ],
   providers: [
     GolsService,
     MessageService
   ],
   exports:[
-    GolsCadastroComponent
+    GolsCadastroComponent,
+    GolsExcluirComponent
   ]
 })
 export class GolsModule { }

@@ -24,6 +24,7 @@ import { PartidasCadastroComponent } from './partidas/partidas-cadastro/partidas
 import { GolsCadastroComponent } from './gols/gols-cadastro/gols-cadastro.component';
 import { GolsModule } from './gols/gols.module';
 import { VisaogeralCampeonatoComponent } from './visaogeral/visaogeral-campeonato/visaogeral-campeonato.component';
+import { GolsExcluirComponent } from './gols/gols-excluir/gols-excluir.component';
 
 
 
@@ -34,6 +35,7 @@ const rotas: Routes = [
   {path: 'partidas/novo', component: PartidasCadastroComponent},
   {path: 'gols/novo', component: GolsCadastroComponent},
   {path: 'visaogeral', component: VisaogeralCampeonatoComponent},
+  {path: 'gols/excluir', component: GolsExcluirComponent},
   //{path: '' , redirectTo:'categorias' ,pathMatch:'full'},
 ];
 
