@@ -48,6 +48,7 @@ export class GolsCadastroComponent implements OnInit {
       partida.placar=this.golsTime1+' X '+this.golsTime2;
       this.service.alterarPlacar(partida);
 
+
      this.service.adicionar(this.gol)
       .then(() => {
         this.messageService.add({ severity: 'success', detail: 'Gol de '+ this.gol.jogador.nome+' Adicionado' });
@@ -100,6 +101,7 @@ export class GolsCadastroComponent implements OnInit {
       this.golsTime1=parseInt(c[0])
       this.golsTime2=parseInt(c[1])
 
+
     }
 
     }
@@ -121,21 +123,14 @@ export class GolsCadastroComponent implements OnInit {
         if(partida.placar.endsWith('0 X 0')){
           this.messageService.add({ severity: 'warn', detail: 'Partida já está zerada' });
         }else{
-          this.messageService.add({ severity: 'error', detail: 'Exclua os gols da Partida nas opções de excluir gols' });
+          this.messageService.add({ severity: 'error', detail: 'Exclua gols nas opções de excluir gols' });
+            }
+
         }
       }
 
-     }
 
-     contemGol(partida:Partida){
 
-          var x = partida.placar.split('X')
-          if( (parseInt(x[0]) + parseInt(x[1])) > 0){
-            return true
-          }else{
-            return false
-          }
-        }
 
 
 
