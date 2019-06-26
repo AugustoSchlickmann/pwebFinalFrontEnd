@@ -28,11 +28,15 @@ export class PartidasCadastroComponent implements OnInit {
   }
 
   inserir(form: FormControl) {
+    if(this.partida.time1.id==this.partida.time2.id){
+      this.messageService.add({ severity: 'error', detail: 'Partida Inviável!' });
+    }else{
     this.service.adicionar(this.partida)
       .then(() => {
         this.messageService.add({ severity: 'success', detail: 'Partida Cadastrada!' });
         form.reset();
       });
+    }
   }
 
 
