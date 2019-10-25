@@ -1,8 +1,5 @@
-import { VisaogeralModule } from './visaogeral/visaogeral.module';
-import { PartidasModule } from './partidas/partidas.module';
-import { CampeonatosModule } from './campeonatos/campeonatos.module';
-import { JogadoresModule } from './jogadores/jogadores.module';
-import { TimesCadastroComponent } from './times/times-cadastro/times-cadastro.component';
+import { UsuarioModule } from './usuario/usuario.module';
+import { DoacaoModule } from './doacao/doacao.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,26 +14,14 @@ import {TableModule} from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {SidebarModule} from 'primeng/sidebar';
-import { TimesModule } from './times/times.module';
-import {JogadoresCadastroComponent} from './jogadores/jogadores-cadastro/jogadores-cadastro.component';
-import { CampeonatosCadastroComponent } from './campeonatos/campeonatos-cadastro/campeonatos-cadastro.component';
-import { PartidasCadastroComponent } from './partidas/partidas-cadastro/partidas-cadastro.component';
-import { GolsCadastroComponent } from './gols/gols-cadastro/gols-cadastro.component';
-import { GolsModule } from './gols/gols.module';
-import { VisaogeralCampeonatoComponent } from './visaogeral/visaogeral-campeonato/visaogeral-campeonato.component';
-import { GolsExcluirComponent } from './gols/gols-excluir/gols-excluir.component';
+import { DoacaoPesquisaComponent } from './doacao/doacao-pesquisa/doacao-pesquisa.component';
+import { UsuarioCadastroComponent } from './usuario/usuario-cadastro/usuario-cadastro.component';
 
 
 
 const rotas: Routes = [
-  {path: 'times/novo', component: TimesCadastroComponent},
-  {path: 'jogadores/novo', component: JogadoresCadastroComponent},
-  {path: 'campeonatos/novo', component: CampeonatosCadastroComponent},
-  {path: 'partidas/novo', component: PartidasCadastroComponent},
-  {path: 'gols/novo', component: GolsCadastroComponent},
-  {path: 'visaogeral', component: VisaogeralCampeonatoComponent},
-  {path: 'gols/excluir', component: GolsExcluirComponent},
-  //{path: '' , redirectTo:'categorias' ,pathMatch:'full'},
+  {path: 'doacoes', component: DoacaoPesquisaComponent},
+  {path: 'usuario/novo', component: UsuarioCadastroComponent},
 ];
 
 @NgModule({
@@ -56,12 +41,9 @@ const rotas: Routes = [
     ConfirmDialogModule,
     RouterModule,
     SidebarModule,
-    TimesModule,
-    JogadoresModule,
-    CampeonatosModule,
-    PartidasModule,
-    GolsModule,
-    VisaogeralModule
+    DoacaoModule,
+    UsuarioModule
+
 
   ],
   providers: [

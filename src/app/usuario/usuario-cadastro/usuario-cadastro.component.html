@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+
+<div class="container">
+
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="inserir(f)">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+              <h1>Cadastro de Usuário</h1>
+            </div>
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Nome Completo</label>
+                <input pInputText type="text" name="nome" [(ngModel)]="usuario.nomeCompleto" #nomeCompleto="ngModel" required minlength="3">
+                <div *ngIf="nomeCompleto.hasError('required') && nomeCompleto.touched">Informe o nome</div>
+                <div *ngIf="nomeCompleto.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
+            </div>
+
+          <div class="ui-g-12 ui-md-9 ui-fluid">
+            <label>Nome de Usuário</label>
+            <input pInputText type="text" name="nomeUsuario" [(ngModel)]="usuario.nomeUsuario"
+            #nomeUsuario="ngModel">
+            <div *ngIf="nomeUsuario.hasError('required') && nomeUsuario.touched">Informe o Login</div>
+
+         </div>
+
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Estado</label>
+               <p-dropdown [options]="estados"
+                 [(ngModel)]="usuario.endereco.estado"
+                 >
+              </p-dropdown>
+
+            </div>
+
+
+
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Cadastrar-se" [disabled]="f.invalid" class=" boxButton"></button>
+
+            </div>
+        </div>
+    </form>
+
+</div>
