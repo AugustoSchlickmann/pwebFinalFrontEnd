@@ -13,10 +13,15 @@ import { DataViewModule } from 'primeng/dataview';
 import { ToastModule } from 'primeng/toast';
 import {PasswordModule} from 'primeng/password';
 import {DialogModule} from 'primeng/dialog';
+import { DoacaoCadastroComponent } from './doacao-cadastro/doacao-cadastro.component';
+import { MessageService } from 'primeng/api';
+import { doacaoService } from './doacaoService.service';
+import { ServicosService } from '../servicos.service';
+import { DoacaoDetalheComponent } from './doacao-detalhe/doacao-detalhe.component';
 
 
 @NgModule({
-  declarations: [DoacaoPesquisaComponent],
+  declarations: [DoacaoPesquisaComponent, DoacaoCadastroComponent, DoacaoDetalheComponent],
   imports: [
     CommonModule,
     DataViewModule,
@@ -32,6 +37,14 @@ import {DialogModule} from 'primeng/dialog';
     InputTextModule,
     PasswordModule,
     DialogModule
+  ],
+  providers:  [
+    ServicosService,
+    doacaoService,
+    MessageService
+  ],
+  exports:[
+    DoacaoCadastroComponent
   ]
 })
 export class DoacaoModule { }

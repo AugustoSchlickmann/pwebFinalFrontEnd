@@ -30,6 +30,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   cadastrar(form: FormControl) {
+
     this.service.cadastrarUsuario(this.usuario)
       .then(() => {
         this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.usuario.nomeCompleto + ' Cadastrado' });

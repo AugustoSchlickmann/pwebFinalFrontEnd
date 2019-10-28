@@ -9,12 +9,13 @@ import { Usuario } from './model';
 })
 export class AppComponent {
   title = 'DOE-FÁCIL';
+
   logado:Usuario
 
   constructor(private service: ServicosService){}
 
   login(){
-
+    this.service.buscarUsuarioPorCodigo(1).then((dados)=>{ this.logado=dados});
   }
 
 

@@ -12,13 +12,17 @@ import { DataViewModule } from 'primeng/dataview';
 import { ToastModule } from 'primeng/toast';
 import {PasswordModule} from 'primeng/password';
 import {DialogModule} from 'primeng/dialog';
+import {FileUploadModule} from 'primeng/fileupload';
+import {InputMaskModule} from 'primeng/inputmask';
 
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 import { ServicosService } from '../servicos.service';
 import { MessageService } from 'primeng/api';
+import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
-  declarations: [UsuarioCadastroComponent],
+  declarations: [UsuarioCadastroComponent, MeuPerfilComponent],
   imports: [
     CommonModule,
     DataViewModule,
@@ -33,7 +37,10 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     InputTextModule,
     PasswordModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule,
+    InputMaskModule,
+    TableModule,
   ],
   providers: [
     ServicosService,

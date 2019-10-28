@@ -1,3 +1,5 @@
+import { DoacaoDetalheComponent } from './doacao/doacao-detalhe/doacao-detalhe.component';
+import { DoacaoCadastroComponent } from './doacao/doacao-cadastro/doacao-cadastro.component';
 import { UsuarioModule } from './usuario/usuario.module';
 import { DoacaoModule } from './doacao/doacao.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,12 +18,16 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {SidebarModule} from 'primeng/sidebar';
 import { DoacaoPesquisaComponent } from './doacao/doacao-pesquisa/doacao-pesquisa.component';
 import { UsuarioCadastroComponent } from './usuario/usuario-cadastro/usuario-cadastro.component';
+import { MeuPerfilComponent } from './usuario/meu-perfil/meu-perfil.component';
 
 
 
 const rotas: Routes = [
   {path: 'doacoes', component: DoacaoPesquisaComponent},
   {path: 'usuario/novo', component: UsuarioCadastroComponent},
+  {path: 'usuario/meuperfil', component: MeuPerfilComponent},
+  {path: 'doacao/nova', component: DoacaoCadastroComponent},
+  {path: 'doacoes/:id', component: DoacaoDetalheComponent}
 ];
 
 @NgModule({

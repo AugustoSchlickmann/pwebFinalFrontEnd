@@ -1,5 +1,7 @@
+import { Doacao } from './doacao/modelos';
+
 export class Usuario{
-    id:number;
+    idUsuario:number;
 	  nomeCompleto:string ;
     nomeUsuario:string;
     img:String;
@@ -10,11 +12,17 @@ export class Usuario{
     cpf:string;
     votosPositivos:number;
     votosNegativos:number;
-    endereco = new Endereco();
-    noificacoes:Notificacao[];
+
+    estado:string;
+    cidade:string;
+    bairro:string;
+    rua:string;
+    numero:string;
+    complemento:string;
+
     feitas:Doacao[];
     recebidas:Doacao[];
-
+    notificacoes:Notificacao[];
 }
 
 export class Notificacao{
@@ -22,25 +30,5 @@ export class Notificacao{
   conteudo:string;
   lida:boolean;
 }
-export class Doacao{
-  id:number;
-  nome:string ;
-  categoria:string;
-  img:String;
-  status:string;
-  metodoFrete:string;
-  descricao:string;
-  votosPositivos:number;
-  votosNegativos:number;
-  dataInicio:string;
-  dataFim:string;
-}
-export class Endereco{
-  id:number;
-  cidade:string;
-  estado:string;
-  bairro:string;
-  rua:string;
-  numero:string;
-  complemento:string;
-}
+
+

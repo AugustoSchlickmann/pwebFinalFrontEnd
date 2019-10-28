@@ -1,24 +1,27 @@
+
+
 export class Doacao{
     id:number;
-	  nome:string ;
+	  nome:string;
     categoria:string;
     img:String;
-	  status:string;
+	  status:string="Disponível";
 	  metodoFrete:string;
  	  descricao:string;
-    votosPositivos:number;
-	  votosNegativos:number;
+    votosPositivos:number=0;
+	  votosNegativos:number=0;
     dataInicio:string;
     dataFim:string;
-    doador:Doador;
+    doador= new Usuario();
+   // recebedor = new Usuario();
 }
 
-export class Doador{
-nomeCompleto:string;
-endereco:Endereco;
-}
-
-export class Endereco{
-  cidade:string;
-  estado:string;
+export class Usuario{
+    idUsuario:number;
+    estado:string;
+    cidade:string;
+    bairro:string;
+    rua:string;
+    numero:string;
+    complemento:string;
 }

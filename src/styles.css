@@ -14,17 +14,3 @@ label {
     margin: 0 auto;
   }
 }
-
-.col-id {
-  width: 60px;
-  text-align: left;
-}
-
-.col-id-header {
-  width: 60px;
-}
-
-.col-acoes{
-  width: 100px;
-  text-align: center;
-}

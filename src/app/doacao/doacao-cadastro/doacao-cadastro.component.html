@@ -1,0 +1,45 @@
+<p-toast></p-toast>
+
+<div class="container">
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="cadastrar(f)">
+        <div class="ui-g-12 ui-md-6">
+
+            <div class="ui-g-12" style="text-align:center">
+              <h1>Cadastro de Doação</h1>
+            </div>
+
+            <div class="ui-g-12   ui-fluid">
+                <label>Nome da Doação</label>
+                <input pInputText type="text" name="nome" [(ngModel)]="nova.nome" #nome="ngModel" required minlength="3">
+                <div *ngIf="nome.hasError('required') && nome.touched">Informe o nome</div>
+                <div *ngIf="nome.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
+            </div>
+
+            <div>
+           <div class="ui-g-12 ui-fluid">
+                <label>Categoria</label>
+               <p-dropdown [options]="categorias"  [(ngModel)]="nova.categoria"  placeholder="Selecione uma Categoria"
+               name="categoria"  required   #categoria="ngModel">  </p-dropdown>
+           </div>
+          </div>
+                <div class="ui-g-12  ui-fluid">
+                <label>Método do Frete</label>
+               <p-dropdown [options]="metodos"  [(ngModel)]="nova.metodoFrete"  placeholder="Selecione um Método para o Frete"
+               name="metodoFrete"  required   #metodoFrete="ngModel">  </p-dropdown>
+            </div>
+
+
+            <div class="ui-g-12 ui-fluid">
+              <label>Descrição</label>
+              <input pInputText type="text" name="descricao" [(ngModel)]="nova.descricao" #descricao="ngModel">
+            </div>
+
+
+            <div class="ui-g-12">
+              <button pButton type="submit" label="Cadastrar Doação" [disabled]="f.invalid" class=" boxButton" ></button>
+            </div>
+
+      </div>
+    </form>
+
+</div>

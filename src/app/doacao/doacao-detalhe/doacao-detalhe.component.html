@@ -1,0 +1,62 @@
+<p-toast></p-toast>
+
+<div class="container">
+
+  <div class="ui-g-12 ui-md-6">
+
+            <div class="ui-g-12" style="text-align:center">
+              <h1>Informaçoes da Doação</h1>
+            </div>
+
+            <div class="ui-g-12   ui-fluid">
+                <label>Nome da Doação: {{doacao.nome}}</label>
+
+            </div>
+
+            <div class="ui-g-12  ui-fluid">
+                <label>Nome do Doador: {{doacao.doador.nomeCompleto}}</label>
+
+            </div>
+
+            <div class="ui-g-12  ui-fluid">
+                <label>Estado: {{doacao.doador.estado}}</label>
+
+            </div>
+
+            <div class="ui-g-12   ui-fluid">
+                <label>Cidade: {{doacao.doador.cidade}}</label>
+
+            </div>
+
+
+
+            <div class="ui-g-12 ui-fluid">
+                <label>Método do Frete: {{doacao.metodoFrete}}</label>
+
+            </div>
+
+
+            <div class="ui-g-12   ui-fluid">
+                <label><span class="pi pi-thumbs-up"></span>Votos Positivos = {{doacao.votosPositivos}}</label>
+
+            </div>
+            <div class="ui-g-12   ui-fluid">
+                <label><span class="pi pi-thumbs-down"></span>Votos Negativos = {{doacao.votosNegativos}}</label>
+
+            </div>
+
+
+            <div class="ui-g-12 ui-fluid">
+              <label>Descrição: {{doacao.descricao}}</label>
+
+            </div>
+
+
+            <div class="ui-g-12">
+              <button pButton  label="Solicitar Doação" [disabled]="true" class=" boxButton" ></button>
+            </div>
+
+      </div>
+
+
+</div>
