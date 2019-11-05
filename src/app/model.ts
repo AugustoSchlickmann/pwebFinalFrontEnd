@@ -1,10 +1,10 @@
 import { Doacao } from './doacao/modelos';
 
 export class Usuario{
-    idUsuario:number;
+    idUsuario:number=0;
 	  nomeCompleto:string ;
     nomeUsuario:string;
-    img:String;
+    imgUsuario:Blob;
     email:string;
     senha:string;
     dataNasc:string;
@@ -29,6 +29,9 @@ export class Notificacao{
   id:number;
   conteudo:string;
   lida:boolean;
+
+  notificador:Usuario
+  notificado:Usuario
 }
 
 

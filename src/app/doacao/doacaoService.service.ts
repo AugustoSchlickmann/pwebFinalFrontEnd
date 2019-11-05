@@ -32,7 +32,7 @@ export class doacaoService {
     .toPromise();
   }
 
-  buscarDoacaoPorCodigo(codigo: number): Promise<Doacao> {
+  buscarPorCodigo(codigo: number): Promise<Doacao> {
     return this.http.get<Doacao>(this.doacaoURL+'/'+codigo).toPromise();
   }
 

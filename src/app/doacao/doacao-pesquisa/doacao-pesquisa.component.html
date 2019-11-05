@@ -11,12 +11,23 @@
                 <div class="ui-g-12 ui-md-6  ui-lg-3">
                   <input type="search" pInputText placeholder="Pesquisar por Nome" (keyup)="dv.filter($event.target.value, 'contains')">
                 </div>
-                <div class="ui-g-12 ui-md-6 ui-lg-3">
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3" *ngIf="logado==null">
                     <button pButton type="buttonq" icon="pi pi-user-plus" label="Cadastre-se" routerLink="/usuario/novo"></button>
                 </div>
-                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="ui-g-12 ui-md-6 ui-lg-3" *ngIf="logado==null">
                     <button pButton type="button" icon="pi pi-user" (click)="showDialog()" label="Login"></button>
                 </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3" *ngIf="logado!=null">
+                  <button pButton type="buttonq" icon="pi pi-plus" label="Doar" routerLink="/doacao/nova"></button>
+              </div>
+              <div class="ui-g-12 ui-md-6 ui-lg-3" *ngIf="logado!=null">
+                <p-menu #menu [popup]="true" [model]="items"></p-menu>
+                <button type="button" pButton icon="pi pi-bars" label="{{logado.nomeUsuario}}" (click)="menu.toggle($event)"></button>
+              </div>
+
+
               </div>
 
 
@@ -30,7 +41,8 @@
                 <div class="doacao-detail"><span class="pi pi-thumbs-down"></span>Votos Negativos = {{doacao.votosNegativos}}</div>
                 <div class="doacao-detail"> {{doacao.categoria}}</div>
                 <div class="doacao-detail"> {{doacao.doador.cidade}} - {{doacao.doador.estado}}</div>
-                <div class="ui-fluid"> <button pButton type="button" icon="pi pi-search" [routerLink]="['/doacoes/',doacao.id]" ></button></div>
+                <div class="ui-fluid" *ngIf="logado!=null"> <button pButton type="button" icon="pi pi-search" [routerLink]="['/doacoes/',doacao.id]" ></button>
+                </div>
                 <hr class="ui-widget-content" style="border-top:0">
 
             </p-panel>
@@ -46,10 +58,10 @@
        <input id="nomeUsuario" type="text" />
       </div >
       <div class="ui-g-12  ui-fluid" style="text-align:center">Senha:
-       <input id="senhaUsuario" type="password" />
+       <input id="senhaUsuario" type="password" [(ngModel)]="senha" />
       </div>
       <div class="  ui-fluid">
-        <button pButton type="button" icon="pi pi-sign-in" (click)="login()"></button>
+        <button pButton  icon="pi pi-sign-in" (click)="login()"></button>
       </div>
 
 </p-dialog>

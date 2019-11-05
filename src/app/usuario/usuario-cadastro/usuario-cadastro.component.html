@@ -1,4 +1,3 @@
-<p-toast></p-toast>
 
 <div class="container">
     <form #f="ngForm" autocomplete="off" (ngSubmit)="cadastrar(f)">
@@ -60,7 +59,7 @@
 
            <div class="ui-g-6 ui-fluid">
             <label>Confirme a Senha</label>
-           <input pInputText type="password" name="senha2"required>
+           <input pInputText type="password" name="senha2" [(ngModel)]="senha2" required>
            </div>
 
 
@@ -82,6 +81,8 @@
             <label>Complemento</label>
            <input pInputText type="text" name="complemento" [(ngModel)]="usuario.complemento" #complemento="ngModel" >
           </div>
+
+
 
 
 

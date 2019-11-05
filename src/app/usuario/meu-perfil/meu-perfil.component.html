@@ -1,4 +1,4 @@
-
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="container">
 
@@ -73,6 +73,13 @@
                   <button pButton type="submit" label="Editar Perfil" icon="pi pi-pencil" class=" boxButton"></button>
                 </div>
             </div>
+
+            <div class="ui-g-12">
+              <div class="ui-g-6">
+                <button pButton (click)="logoff()" label="Sair" icon="pi pi-times" class="ui-button-danger"></button>
+              </div>
+          </div>
+
         </div>
 
             <div class="ui-g-6 ui-fluid" style="text-align:center">
@@ -91,7 +98,8 @@
                           <td>{{feita.nome}}</td>
                           <td>{{feita.status}}</td>
                          <td>
-                            <button pButton icon="pi pi-pencil" ></button>
+                            <button pButton icon="pi pi-pencil" [routerLink]="['/doacao/nova',feita.id]" ></button>
+                            <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(feita)"></button>
                         </td>
                         </tr>
                       </ng-template>
@@ -116,7 +124,7 @@
                             <td>{{recebida.nome}}</td>
                             <td>{{recebida.votosPositivos}}</td>
                            <td>
-                              <button pButton icon="pi pi-user" ></button>
+                              <button pButton icon="pi pi-user"  [routerLink]="['/usuario/',recebida.doador.idUsuario]"></button>
                               {{recebida.doador.nomeCompleto}}
                           </td>
                           </tr>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ServicosService } from './servicos.service';
 import { Usuario } from './model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,15 @@ import { Usuario } from './model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'DOE-FÁCIL';
 
   logado:Usuario
 
-  constructor(private service: ServicosService){}
 
-  login(){
-    this.service.buscarUsuarioPorCodigo(1).then((dados)=>{ this.logado=dados});
-  }
+  constructor(private service: ServicosService,
+    public toast: MessageService,){}
+
 
 
 }

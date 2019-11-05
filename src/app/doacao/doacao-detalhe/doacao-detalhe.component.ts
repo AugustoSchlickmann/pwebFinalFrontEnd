@@ -25,7 +25,7 @@ export class DoacaoDetalheComponent implements OnInit {
   }
 
   carregarDoacao(id:number){
-    this.service.buscarDoacaoPorCodigo(id)
+    this.service.buscarPorCodigo(id)
       .then((data) => {
         this.doacao = data;
       }

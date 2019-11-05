@@ -1,11 +1,11 @@
-<p-toast></p-toast>
+
 
 <div class="container">
-    <form #f="ngForm" autocomplete="off" (ngSubmit)="cadastrar(f)">
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
         <div class="ui-g-12 ui-md-6">
 
             <div class="ui-g-12" style="text-align:center">
-              <h1>Cadastro de Doação</h1>
+              <h1>{{editando?'Edição de ': 'Cadastro de'}} Doação</h1>
             </div>
 
             <div class="ui-g-12   ui-fluid">
@@ -36,7 +36,7 @@
 
 
             <div class="ui-g-12">
-              <button pButton type="submit" label="Cadastrar Doação" [disabled]="f.invalid" class=" boxButton" ></button>
+              <button pButton type="submit" label="Salvar Doação" [disabled]="f.invalid" class=" boxButton" ></button>
             </div>
 
       </div>

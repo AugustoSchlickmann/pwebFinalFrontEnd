@@ -1,9 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { doacaoService } from '../doacaoService.service';
 import { Doacao} from '../modelos';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ServicosService } from 'src/app/servicos.service';
+import { Usuario } from 'src/app/model';
 
 
 @Component({
@@ -14,6 +17,7 @@ import { Router } from '@angular/router';
 export class DoacaoCadastroComponent implements OnInit {
 
 nova:Doacao=new Doacao();
+logado:Usuario;
 
 categorias=[
   {label:'Vestimenta', value:'Vestimenta'},
@@ -33,22 +37,66 @@ metodos=[
 
   constructor(private service: doacaoService,
     private messageService: MessageService,
-    private rotaprogramatica:Router) { }
+    private rotaprogramatica:Router,
+    private rota: ActivatedRoute,
+    private service2:ServicosService) { }
 
-  ngOnInit() {
+ngOnInit() {
+    const codigoDoacao = this.rota.snapshot.params['id'];
+    if(codigoDoacao){this.carregarDoacao(codigoDoacao);}
+
+    this.logado = this.service2.Usuariologado();
 
   }
 
   cadastrar(form: FormControl) {
 
-    this.nova.doador.idUsuario=1;
+    if(this.logado!=null){
+      this.nova.doador.idUsuario=this.logado.idUsuario;
 
     this.service.adicionarDoacao(this.nova)
       .then(() => {
         this.messageService.add({ severity: 'success', detail: 'Doação ' + this.nova.nome + ' Cadastrada' });
         form.reset();
       });
+      this.rotaprogramatica.navigate(['/doacoes']);
+    }else{
+      this.messageService.add({ severity: 'error', detail: 'Você precisa de uma conta para cadastrar uma doação' });
+    }
 
-      //this.rotaprogramatica.navigate(['/doacoes']);
+
+
   }
+
+
+  carregarDoacao(id:number){
+    this.service.buscarPorCodigo(id)
+      .then((data) => {
+        this.nova = data;
+      }
+    );
+  }
+
+  alterar(form: FormControl) {
+    this.service.alterar(this.nova)
+    .then( ()=>{
+      this.messageService.add({severity:'success', summary:'Edição', detail:'Doacão '+this.nova.nome+' alterada'});
+      form.reset();
+    });
+    this.rotaprogramatica.navigate(['/usuario/meuperfil']);
+  }
+
+  salvar(form: FormControl) {
+    if(this.editando){
+      this.alterar(form);
+    }else{
+      this.cadastrar(form);
+    }
+  }
+
+  get editando(){
+    return Boolean(this.nova.id);
+  }
+
+
 }
