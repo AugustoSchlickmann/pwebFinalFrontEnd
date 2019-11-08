@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Doacao } from './modelos';
+import { Doacao, Usuario } from './modelos';
 
 
 @Injectable({
@@ -9,6 +9,7 @@ import { Doacao } from './modelos';
 export class doacaoService {
 
   doacaoURL = 'http://localhost:8090/doacoes';
+  usuarioURL = 'http://localhost:8090/usuarios'
 
   constructor( private http: HttpClient) { }
 
@@ -34,6 +35,11 @@ export class doacaoService {
 
   buscarPorCodigo(codigo: number): Promise<Doacao> {
     return this.http.get<Doacao>(this.doacaoURL+'/'+codigo).toPromise();
+  }
+
+  atualizarUsuario(usuario: Usuario): Promise<any>{
+    return this.http.put(this.usuarioURL+'/'+usuario.idUsuario, usuario)
+    .toPromise();
   }
 
 

@@ -30,7 +30,7 @@ import { OutremPerfilComponent } from './usuario/outrem-perfil/outrem-perfil.com
 const rotas: Routes = [
   {path: 'doacoes', component: DoacaoPesquisaComponent},
   {path: 'usuario/novo', component: UsuarioCadastroComponent},
-  {path: 'usuario/novo/:id', component: UsuarioCadastroComponent},
+  {path: 'usuario/meuperfil/editar', component: UsuarioCadastroComponent},
   {path: 'usuario/meuperfil', component: MeuPerfilComponent},
   {path: 'usuario/:id', component: OutremPerfilComponent},
   {path: 'doacao/nova', component: DoacaoCadastroComponent},

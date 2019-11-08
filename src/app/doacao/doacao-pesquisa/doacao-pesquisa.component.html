@@ -36,9 +36,7 @@
     <ng-template let-doacao pTemplate="gridItem">
         <div  class="ui-g-12 ui-md-3">
             <p-panel [header]="doacao.nome" [style]="{'text-align':'center'}">
-                <img src="{{doacao.img}}.jpg" width="100">
-                <div class="doacao-detail"> <span class="pi pi-thumbs-up"></span>Votos Positivos = {{doacao.votosPositivos}} </div>
-                <div class="doacao-detail"><span class="pi pi-thumbs-down"></span>Votos Negativos = {{doacao.votosNegativos}}</div>
+                <img src="" width="100">
                 <div class="doacao-detail"> {{doacao.categoria}}</div>
                 <div class="doacao-detail"> {{doacao.doador.cidade}} - {{doacao.doador.estado}}</div>
                 <div class="ui-fluid" *ngIf="logado!=null"> <button pButton type="button" icon="pi pi-search" [routerLink]="['/doacoes/',doacao.id]" ></button>
@@ -54,11 +52,11 @@
 [modal]="true" [resizable]="false" [style]="{width: '350px', height: '200px','text-align':'center'}">
 
 
-      <div class="ui-g-12  ui-fluid" style="text-align:center">Nome de Usuário:
-       <input id="nomeUsuario" type="text" />
-      </div >
-      <div class="ui-g-12  ui-fluid" style="text-align:center">Senha:
-       <input id="senhaUsuario" type="password" [(ngModel)]="senha" />
+       <label>Nome de Usuário</label>
+       <input id="nomeUsuario" type="text" class="ui-g-12  ui-fluid"/>
+
+      <div class="ui-g-12  ui-fluid"> <label>Senha</label>
+       <input id="senhaUsuario" type="password" class="ui-g-12  ui-fluid" [(ngModel)]="senha" />
       </div>
       <div class="  ui-fluid">
         <button pButton  icon="pi pi-sign-in" (click)="login()"></button>

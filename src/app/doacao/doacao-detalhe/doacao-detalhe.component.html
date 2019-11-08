@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+
 
 <div class="container">
 
@@ -38,13 +38,14 @@
             </div>
 
 
-            <div class="ui-g-12   ui-fluid">
-                <label><span class="pi pi-thumbs-up"></span>Votos Positivos = {{doacao.votosPositivos}}</label>
-
+            <div class="ui-g-12 ">
+              <label> Votos Positivos = </label> <button pButton [disabled]='gosteiClicado' icon="pi pi-thumbs-up" label="{{doacao.votosPositivos}}"
+                 pTooltip="Gostei" tooltipPosition="top" showDelay="1000" class="ui-button-rounded ui-button-success" (click)="gostei()"></button>
             </div>
-            <div class="ui-g-12   ui-fluid">
-                <label><span class="pi pi-thumbs-down"></span>Votos Negativos = {{doacao.votosNegativos}}</label>
 
+            <div class="ui-g-12 ">
+              <label> Votos Negativos = </label> <button pButton [disabled]="naogosteiClicado" icon="pi pi-thumbs-down" label="{{doacao.votosNegativos}}"
+              pTooltip="Não Gostei" tooltipPosition="top" showDelay="1000" class="ui-button-rounded ui-button-danger" (click)="naogostei()"></button>
             </div>
 
 

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { doacaoService } from '../doacaoService.service';
 import { Doacao } from '../modelos';
@@ -65,15 +64,8 @@ onSortChange(event) {
 login(){
   this.service2.autenticar(this.senha);
 
-  this.logado = this.service2.Usuariologado();
+  this.logado=this.service2.Usuariologado();
 
-  if(this.service2.logado!=null){
-    this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.logado.nomeCompleto + ' Autenticado' });
-    this.rotaprogramatica.navigate(['/usuario/meuperfil']);
-
-  }else{
-    this.messageService.add({ severity: 'error', detail: 'Dados  Inválidos' });
-  }
 }
 
 

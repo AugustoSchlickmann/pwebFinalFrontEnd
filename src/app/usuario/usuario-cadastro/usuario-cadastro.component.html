@@ -1,15 +1,16 @@
 
 <div class="container">
-    <form #f="ngForm" autocomplete="off" (ngSubmit)="cadastrar(f)">
+    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
         <div class="ui-g">
 
             <div class="ui-g-12" style="text-align:center">
-              <h1>Cadastro de Usuário</h1>
+              <h1>{{editando?'Edição de ': 'Cadastro de'}} Usuário</h1>
             </div>
 
             <div class="ui-g-6  ui-fluid">
                 <label>Nome Completo</label>
-                <input pInputText type="text" name="nome" [(ngModel)]="usuario.nomeCompleto" #nomeCompleto="ngModel" required minlength="3">
+                <input pInputText type="text" name="nome" [(ngModel)]="usuario.nomeCompleto" #nomeCompleto="ngModel" required
+                [disabled]='editando' minlength="3">
                 <div *ngIf="nomeCompleto.hasError('required') && nomeCompleto.touched">Informe o nome</div>
                 <div *ngIf="nomeCompleto.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
             </div>
@@ -45,10 +46,15 @@
           </div>
 
 
-           <div class="ui-g-6 ui-fluid">
+           <div class="ui-g-6 ui-fluid" *ngIf="!editando">
              <label>Senha</label>
             <input pInputText type="password" name="senha1" [(ngModel)]="usuario.senha" #senha1="ngModel" required>
             <div *ngIf="senha1.hasError('required') && senha1.touched">Informe a Senha</div>
+           </div>
+
+           <div class="ui-g-6 ui-fluid" *ngIf="editando">
+            <label>Senha Atual</label>
+           <input pInputText type="password" name="senhaAtual" [(ngModel)]="senhaAtual" required>
            </div>
 
            <div class="ui-g-6 ui-fluid">
@@ -57,10 +63,24 @@
            <div *ngIf="rua.hasError('required') && rua.touched">Informe a Rua</div>
           </div>
 
-           <div class="ui-g-6 ui-fluid">
+          <div class="ui-g-6 ui-fluid" *ngIf="!editando">
             <label>Confirme a Senha</label>
            <input pInputText type="password" name="senha2" [(ngModel)]="senha2" required>
            </div>
+
+
+
+          <div class="ui-g-6 ui-fluid" *ngIf="editando">
+            <label>Nova Senha</label>
+               <input id="disabled-input"  pInputText type="password" name="senhaNova" [(ngModel)]="senhaNova" [disabled]="!mudandoSenha" required="mudandoSenha" />
+          </div>
+
+
+
+          <div class="ui-g-6 ui-fluid" *ngIf="editando">
+             <label>Confirme a Nova Senha</label>
+              <input id="disabled-input2"  pInputText type="password" name="senhaNova2" [(ngModel)]="senhaNova2" [disabled]="!mudandoSenha" required="mudandoSenha"/>
+          </div>
 
 
 
@@ -73,7 +93,8 @@
 
           <div class="ui-g-6 ui-fluid">
             <span>Data Nascimento</span>
-            <p-inputMask mask="99/99/9999" [(ngModel)]="usuario.dataNasc" placeholder="DD/MM/AAA"  #nasc="ngModel" name=nasc required></p-inputMask>
+            <p-inputMask mask="99/99/9999" [(ngModel)]="usuario.dataNasc" placeholder="DD/MM/AAAA"  #nasc="ngModel" name=nasc required
+            [disabled]='editando'></p-inputMask>
             <div *ngIf="nasc.hasError('required') && nasc.touched">Informe a Data</div>
           </div>
 
@@ -84,12 +105,26 @@
 
 
 
-
-
-
-            <div class="ui-g-12">
+            <div class="ui-g-12" *ngIf="!editando">
               <button pButton type="submit" label="Cadastrar-se" [disabled]="f.invalid" class=" boxButton" ></button>
             </div>
+
+            <div class="ui-g-12" *ngIf="editando">
+
+              <div class="ui-g-6 ui-md-3">
+                  <p-checkbox id="disabled-btn" (click)=mudarSenha()  label="Mudar Senha?" ></p-checkbox>
+              </div>
+
+              <div class="ui-g-6 ui-md-3">
+                <button pButton type="submit" label="Confirmar Ediçao" [disabled]="f.invalid" icon="pi pi-check" class="ui-button-success" ></button>
+              </div>
+
+              <div class="ui-g-6 ui-md-3">
+                <a routerLink="/usuario/meuperfil" ><button pButton label="Cancelar Edição" icon="pi pi-times" class="ui-button-danger" ></button></a>
+              </div>
+
+             </div>
+
 
       </div>
     </form>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Usuario} from './model';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { reject } from 'q';
 
 
 @Injectable({
@@ -47,8 +48,15 @@ export class ServicosService {
   }
 
   autenticar(senha:string){
-      this.login(senha).then((dados)=>{ this.logado=dados});
+      this.login(senha).then((dados)=>{ this.logado=dados}) .then( ()=>{
+        if(this.logado!=null){
+          this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.logado.nomeCompleto + ' Autenticado' });
+          this.rotaprogramatica.navigate(['/usuario/meuperfil']);
+        }else{
+          this.messageService.add({ severity: 'error', detail: 'Dados  Inválidos' });
+        }
 
+      });
   }
 
   deslogar(){

@@ -25,4 +25,7 @@ export class Usuario{
     rua:string;
     numero:string;
     complemento:string;
+    votosPositivosUsuario:number=0;
+	  votosNegativosUsuario:number=0;
+
 }

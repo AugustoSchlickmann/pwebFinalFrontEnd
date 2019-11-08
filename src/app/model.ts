@@ -8,10 +8,10 @@ export class Usuario{
     email:string;
     senha:string;
     dataNasc:string;
-    idade:number;
     cpf:string;
-    votosPositivos:number;
-    votosNegativos:number;
+
+    votosPositivosUsuario:number=0;
+    votosNegativosUsuario:number=0;
 
     estado:string;
     cidade:string;

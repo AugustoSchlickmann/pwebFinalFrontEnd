@@ -8,6 +8,13 @@
         <h1>Perfil de {{outrem.nomeCompleto}}</h1>
       </div>
 
+      <div class="ui-g-12 ui-md-6">
+           <label> Avaliações Positivas = </label> <button pButton  label="{{outrem.votosPositivosUsuario}}"   class="ui-button-rounded ui-button-success" ></button>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ">
+        <label> Avaliações Negativas = </label> <button pButton  label="{{outrem.votosNegativosUsuario}}"   class="ui-button-rounded ui-button-danger" ></button>
+      </div>
 
        <div class="ui-g-12">
           <div class="ui-g-6 ui-fluid">
@@ -21,51 +28,15 @@
           </div>
        </div>
 
-       <div class="ui-g-12">
-          <div class="ui-g-6 ui-fluid">
-             <label>Data Nascimento {{outrem.dataNasc}}</label>
-          </div>
-       </div>
 
        <div class="ui-g-12">
           <div class="ui-g-6 ui-fluid">
              <label>Estado: {{outrem.estado}}</label>
           </div>
-       </div>
-
-       <div class="ui-g-12">
           <div class="ui-g-6 ui-fluid">
              <label>Cidade: {{outrem.cidade}}</label>
           </div>
        </div>
-
-       <div class="ui-g-12">
-          <div class="ui-g-6 ui-fluid">
-             <label>Bairro: {{outrem.bairro}}</label>
-          </div>
-       </div>
-
-
-       <div class="ui-g-12">
-          <div class="ui-g-6 ui-fluid">
-             <label>Rua: {{outrem.rua}}</label>
-          </div>
-       </div>
-
-
-       <div class="ui-g-12">
-          <div class="ui-g-6 ui-fluid">
-             <label>Número: {{outrem.numero}}</label>
-          </div>
-       </div>
-
-
-
-    <div class="ui-g-12">
-        <div class="ui-g-6 ui-fluid">
-           <label>Complemento: {{outrem.complemento}}</label>
-        </div>
-     </div>
 
 
       <div class="ui-g-12">
@@ -75,8 +46,9 @@
       </div>
   </div>
 
-      <div class="ui-g-6 ui-fluid" style="text-align:center">
-          <h2 >Doaçoes Feitas</h2>
+  <div class="ui-g-12 ui-md-6">
+      <div class=" ui-fluid" style="text-align:center">
+          <h2 >Doações Feitas</h2>
           <p-table [value]="outrem.feitas" [paginator]="true" [rows]="8" [responsive]="true">
               <ng-template pTemplate="header" >
                   <tr>
@@ -100,8 +72,8 @@
         </div>
 
 
-        <div class="ui-g-6 ui-fluid" style="text-align:center">
-            <h2 >Doaçoes Recebidas</h2>
+        <div class="ui-fluid" style="text-align:center">
+            <h2 >Doações Recebidas</h2>
           <p-table [value]="outrem.recebidas" [paginator]="true" [rows]="8" [responsive]="true">
                 <ng-template pTemplate="header" >
                     <tr>
@@ -124,6 +96,7 @@
 
             </p-table>
           </div>
+  </div>
 </div>
 
 

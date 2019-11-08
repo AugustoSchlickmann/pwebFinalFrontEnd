@@ -1,29 +1,8 @@
 <p-toast></p-toast>
 
-  <p-sidebar [(visible)]="sideBar">
 
-    <div class=" ui-g-12 ui-fluid">
-      <h1 class="boxButton">Menu</h1>
-
-      <button pButton type="button" (click) ="sideBar = false" label = "Doações Pesquisa"
-      routerLink="/doacoes" class="boxButton"></button>
-
-      <button pButton type="button" (click) ="sideBar = false" label = "Cadastrar Usuário"
-      routerLink="/usuario/novo" class="boxButton"></button>
-
-      <button pButton type="button" (click) ="sideBar = false" label = "Meu Perfil"
-      routerLink="/usuario/meuperfil" class="boxButton"></button>
-
-      <button pButton type="button" (click) ="sideBar = false" label = "Cadastrar Doação"
-      routerLink="/doacao/nova" class="boxButton"></button>
+    <button pButton type="button" routerLink="/doacoes" class="ui-button-rounded ui-button-success" label="Doe Fácil">
+    <img src="2.jpg" width="100"> </button>
 
 
-
-
-    </div>
-
-  </p-sidebar>
-
-    <button pButton type="button" (click)="sideBar = true" icon="pi pi-th-large"></button>
-
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>

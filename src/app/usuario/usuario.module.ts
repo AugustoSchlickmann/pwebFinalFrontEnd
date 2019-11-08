@@ -14,6 +14,7 @@ import {PasswordModule} from 'primeng/password';
 import {DialogModule} from 'primeng/dialog';
 import {FileUploadModule} from 'primeng/fileupload';
 import {InputMaskModule} from 'primeng/inputmask';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
@@ -43,6 +44,7 @@ import { OutremPerfilComponent } from './outrem-perfil/outrem-perfil.component';
     FileUploadModule,
     InputMaskModule,
     TableModule,
+    CheckboxModule
   ],
   providers: [
     ServicosService,

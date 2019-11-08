@@ -14,6 +14,11 @@ export class UsuarioCadastroComponent implements OnInit {
 
   usuario = new Usuario();
   senha2:string;
+  senhaAtual:string;
+
+  mudandoSenha:boolean=false;
+  senhaNova:string;
+  senhaNova2:string;
 
   uploadedFiles: any[] = [];
 
@@ -31,6 +36,9 @@ export class UsuarioCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.service.logado!=null){
+      this.usuario=this.service.Usuariologado();
+    }
   }
 
   cadastrar(form: FormControl) {
@@ -38,15 +46,63 @@ export class UsuarioCadastroComponent implements OnInit {
 
       this.service.cadastrarUsuario(this.usuario).then(() => {
         this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.usuario.nomeCompleto + ' Cadastrado' });
+      }).then( ()=>{
+        this.service.autenticar(this.usuario.senha)})
 
-      });
-      this.rotaprogramatica.navigate(['doacoes']);
     }else{
       this.messageService.add({ severity: 'error', detail: 'Senhas diferentes' });
     }
 
-
   }
+
+  alterar(form: FormControl) {
+
+    if(this.usuario.senha==this.senhaAtual){
+      if(this.mudandoSenha){
+        if(this.senhaNova==this.senhaNova2){
+          this.usuario.senha=this.senhaNova;
+          this.service.editarUsuario(this.usuario)
+          .then( ()=>{
+          this.messageService.add({severity:'success', summary:'Edição', detail:'Usuário '+this.usuario.nomeCompleto+' alterado'});
+          form.reset();
+          });
+          this.rotaprogramatica.navigate(['/usuario/meuperfil']);
+        }else{
+          this.messageService.add({ severity: 'error', detail: 'Senhas novas não coincidem' });
+        }
+      }else{
+        this.service.editarUsuario(this.usuario)
+        .then( ()=>{
+        this.messageService.add({severity:'success', summary:'Edição', detail:'Usuário '+this.usuario.nomeCompleto+' alterado'});
+        form.reset();
+        });
+        this.rotaprogramatica.navigate(['/usuario/meuperfil']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', detail: 'Senha incorreta' });
+    }
+ }
+
+
+
+
+
+
+  salvar(form: FormControl) {
+    if(this.editando){
+      this.alterar(form);
+    }else{
+      this.cadastrar(form);
+    }
+  }
+
+  get editando(){
+    return Boolean(this.usuario.idUsuario);
+  }
+
+  mudarSenha() {
+    this.mudandoSenha = !this.mudandoSenha;
+}
 
  // onUpload(event) {
 //
