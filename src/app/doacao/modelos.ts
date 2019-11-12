@@ -13,7 +13,7 @@ export class Doacao{
     dataInicio:string;
     dataFim:string;
     doador= new Usuario();
-   // recebedor = new Usuario();
+    recebedor = new Usuario();
 }
 
 export class Usuario{

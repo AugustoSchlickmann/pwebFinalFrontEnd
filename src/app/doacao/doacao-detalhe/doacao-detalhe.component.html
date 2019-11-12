@@ -1,3 +1,4 @@
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 
 <div class="container">
@@ -19,6 +20,13 @@
                 [routerLink]="['/usuario/',doacao.doador.idUsuario]" ></button>
                  </label>
             </div>
+
+            <div class="ui-g-12 " *ngIf="doacao.recebedor!=null">
+              <label>Recebedor
+              <button pButton label="{{doacao.recebedor.nomeCompleto}}"   icon="pi pi-user" class=" boxButton"
+              [routerLink]="['/usuario/',doacao.recebedor.idUsuario]" ></button>
+               </label>
+          </div>
 
             <div class="ui-g-12  ui-fluid">
                 <label>Estado: {{doacao.doador.estado}}</label>
@@ -55,8 +63,8 @@
             </div>
 
 
-            <div class="ui-g-12">
-              <button pButton  label="Solicitar Doação" [disabled]="true" class=" boxButton" ></button>
+            <div class="ui-g-12" *ngIf="doacao.recebedor==null">
+              <button pButton  label="Solicitar Doação"  [disabled]="solicitada" (click)="confirmarSolicitacao()" class=" boxButton" ></button>
             </div>
 
       </div>

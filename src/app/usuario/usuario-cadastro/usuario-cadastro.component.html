@@ -7,101 +7,109 @@
               <h1>{{editando?'Edição de ': 'Cadastro de'}} Usuário</h1>
             </div>
 
-            <div class="ui-g-6  ui-fluid">
+            <div class="ui-g-6 ">
+
+              <div class="ui-g-12 ui-fluid">
                 <label>Nome Completo</label>
                 <input pInputText type="text" name="nome" [(ngModel)]="usuario.nomeCompleto" #nomeCompleto="ngModel" required
                 [disabled]='editando' minlength="3">
                 <div *ngIf="nomeCompleto.hasError('required') && nomeCompleto.touched">Informe o nome</div>
                 <div *ngIf="nomeCompleto.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
-            </div>
+              </div>
 
-           <div class="ui-g-6 ui-fluid">
-                <label>Estado</label>
-               <p-dropdown [options]="estados"  [(ngModel)]="usuario.estado"  placeholder="Selecione um Estado"
-               name="estado"  required   #estado="ngModel">  </p-dropdown>
-            </div>
+              <div class="ui-g-6 ui-fluid ">
+                <label>Nome de Usuário</label>
+                <input pInputText type="text" name="nomeUsuario" [(ngModel)]="usuario.nomeUsuario" #nomeUsuario="ngModel" required>
+                <div *ngIf="nomeUsuario.hasError('required') && nomeUsuario.touched">Informe o Nome de Usuário (Login)</div>
+              </div>
 
-            <div class="ui-g-6 ui-fluid ">
-             <label>Nome de Usuário</label>
-             <input pInputText type="text" name="nomeUsuario" [(ngModel)]="usuario.nomeUsuario" #nomeUsuario="ngModel" required>
-             <div *ngIf="nomeUsuario.hasError('required') && nomeUsuario.touched">Informe o Nome de Usuário (Login)</div>
-           </div>
-
-            <div class="ui-g-6 ui-fluid">
-              <label>Cidade</label>
-              <input pInputText type="text" name="cidade" [(ngModel)]="usuario.cidade" #cidade="ngModel" required>
-              <div *ngIf="cidade.hasError('required') && cidade.touched">Informe a Cidade</div>
-            </div>
-
-            <div class="ui-g-6 ui-fluid">
+              <div class="ui-g-6 ui-fluid">
                 <label>E-mail</label>
                 <input pInputText type="text" name="email" [(ngModel)]="usuario.email" #email="ngModel" required >
                 <div *ngIf="email.hasError('required') && email.touched">Informe o e-mail</div>
+              </div>
+
+              <div class="ui-g-6 ui-fluid" *ngIf="!editando">
+                <label>Senha</label>
+                <input pInputText type="password" name="senha1" [(ngModel)]="usuario.senha" #senha1="ngModel" required>
+              </div>
+
+              <div class="ui-g-6 ui-fluid" *ngIf="!editando">
+                <label>Confirme a Senha</label>
+                <input pInputText type="password" name="senha2" [(ngModel)]="senha2" required>
+              </div>
+
+              <div class="ui-g-12 ui-fluid" *ngIf="editando">
+               <label>Senha Atual</label>
+               <input pInputText type="password" name="senhaAtual" [(ngModel)]="senhaAtual" required>
+              </div>
+
+              <div class="ui-g-6 ui-fluid" *ngIf="editando && mudandoSenha">
+                <label>Nova Senha</label>
+                <input id="disabled-input"  pInputText type="password" name="senhaNova" [(ngModel)]="senhaNova" [disabled]="!mudandoSenha" required="mudandoSenha" />
+              </div>
+
+              <div class="ui-g-6 ui-fluid" *ngIf="editando && mudandoSenha">
+                <label>Confirme a Nova Senha</label>
+                <input id="disabled-input2"  pInputText type="password" name="senhaNova2" [(ngModel)]="senhaNova2" [disabled]="!mudandoSenha" required="mudandoSenha"/>
+              </div>
+
+              <div class="ui-g-6 ui-fluid">
+                <span>Data Nascimento</span>
+                <p-inputMask mask="99/99/9999" [(ngModel)]="usuario.dataNasc" placeholder="DD/MM/AAAA"  #nasc="ngModel" name=nasc required
+                [disabled]='editando'></p-inputMask>
+                <div *ngIf="nasc.hasError('required') && nasc.touched">Informe a Data</div>
+              </div>
+
+              <div class="ui-g-6 ui-fluid">
+                <span>CPF</span>
+                <p-inputMask mask="999.999.999-99" [(ngModel)]="usuario.cpf" placeholder="000.000.000-00"  #cpf="ngModel" name=cpf required
+                [disabled]='editando'></p-inputMask>
+                <div *ngIf="cpf.hasError('required') && cpf.touched">Informe o CPF</div>
+              </div>
+
             </div>
 
-           <div class="ui-g-6 ui-fluid">
-            <label>Bairro</label>
-           <input pInputText type="text" name="bairro" [(ngModel)]="usuario.bairro" #bairro="ngModel" required>
-           <div *ngIf="bairro.hasError('required') && bairro.touched">Informe o Bairro</div>
-          </div>
 
 
-           <div class="ui-g-6 ui-fluid" *ngIf="!editando">
-             <label>Senha</label>
-            <input pInputText type="password" name="senha1" [(ngModel)]="usuario.senha" #senha1="ngModel" required>
-            <div *ngIf="senha1.hasError('required') && senha1.touched">Informe a Senha</div>
-           </div>
+            <div class="ui-g-6 ">
 
-           <div class="ui-g-6 ui-fluid" *ngIf="editando">
-            <label>Senha Atual</label>
-           <input pInputText type="password" name="senhaAtual" [(ngModel)]="senhaAtual" required>
-           </div>
+              <div class="ui-g-6 ui-fluid">
+                <label>Estado</label>
+                <p-dropdown [options]="estados"  [(ngModel)]="usuario.estado"  placeholder="Selecione um Estado"
+               name="estado"  required   #estado="ngModel">  </p-dropdown>
+              </div>
 
-           <div class="ui-g-6 ui-fluid">
-            <label>Rua</label>
-           <input pInputText type="text" name="rua" [(ngModel)]="usuario.rua" #rua="ngModel" required>
-           <div *ngIf="rua.hasError('required') && rua.touched">Informe a Rua</div>
-          </div>
+              <div class="ui-g-6 ui-fluid">
+                <label>Cidade</label>
+                <input pInputText type="text" name="cidade" [(ngModel)]="usuario.cidade" #cidade="ngModel" required>
+                <div *ngIf="cidade.hasError('required') && cidade.touched">Informe a Cidade</div>
+              </div>
 
-          <div class="ui-g-6 ui-fluid" *ngIf="!editando">
-            <label>Confirme a Senha</label>
-           <input pInputText type="password" name="senha2" [(ngModel)]="senha2" required>
-           </div>
+              <div class="ui-g-6 ui-fluid">
+                <label>Bairro</label>
+                <input pInputText type="text" name="bairro" [(ngModel)]="usuario.bairro" #bairro="ngModel" required>
+                <div *ngIf="bairro.hasError('required') && bairro.touched">Informe o Bairro</div>
+              </div>
 
+              <div class="ui-g-6 ui-fluid">
+                <label>Rua</label>
+                <input pInputText type="text" name="rua" [(ngModel)]="usuario.rua" #rua="ngModel" required>
+                <div *ngIf="rua.hasError('required') && rua.touched">Informe a Rua</div>
+              </div>
 
+              <div class="ui-g-6 ui-fluid">
+                <label>Número</label>
+                <input pInputText type="text" name="numero" [(ngModel)]="usuario.numero" #numero="ngModel" required>
+                <div *ngIf="numero.hasError('required') && numero.touched">Informe o Número</div>
+              </div>
 
-          <div class="ui-g-6 ui-fluid" *ngIf="editando">
-            <label>Nova Senha</label>
-               <input id="disabled-input"  pInputText type="password" name="senhaNova" [(ngModel)]="senhaNova" [disabled]="!mudandoSenha" required="mudandoSenha" />
-          </div>
+              <div class="ui-g-6 ui-fluid">
+                <label>Complemento</label>
+                <input pInputText type="text" name="complemento" [(ngModel)]="usuario.complemento" #complemento="ngModel" >
+              </div>
 
-
-
-          <div class="ui-g-6 ui-fluid" *ngIf="editando">
-             <label>Confirme a Nova Senha</label>
-              <input id="disabled-input2"  pInputText type="password" name="senhaNova2" [(ngModel)]="senhaNova2" [disabled]="!mudandoSenha" required="mudandoSenha"/>
-          </div>
-
-
-
-          <div class="ui-g-6 ui-fluid">
-            <label>Número</label>
-           <input pInputText type="text" name="numero" [(ngModel)]="usuario.numero" #numero="ngModel" required>
-           <div *ngIf="numero.hasError('required') && numero.touched">Informe o Número</div>
-          </div>
-
-
-          <div class="ui-g-6 ui-fluid">
-            <span>Data Nascimento</span>
-            <p-inputMask mask="99/99/9999" [(ngModel)]="usuario.dataNasc" placeholder="DD/MM/AAAA"  #nasc="ngModel" name=nasc required
-            [disabled]='editando'></p-inputMask>
-            <div *ngIf="nasc.hasError('required') && nasc.touched">Informe a Data</div>
-          </div>
-
-          <div class="ui-g-6 ui-fluid">
-            <label>Complemento</label>
-           <input pInputText type="text" name="complemento" [(ngModel)]="usuario.complemento" #complemento="ngModel" >
-          </div>
+            </div>
 
 
 
@@ -123,10 +131,9 @@
                 <a routerLink="/usuario/meuperfil" ><button pButton label="Cancelar Edição" icon="pi pi-times" class="ui-button-danger" ></button></a>
               </div>
 
-             </div>
+            </div>
 
-
-      </div>
+        </div>
     </form>
 
 </div>

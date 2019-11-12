@@ -58,8 +58,11 @@ ngOnInit() {
       .then(() => {
         this.messageService.add({ severity: 'success', detail: 'Doação ' + this.nova.nome + ' Cadastrada' });
         form.reset();
-      });
-      this.rotaprogramatica.navigate(['/doacoes']);
+      }).then( ()=>{
+        this.rotaprogramatica.navigate(['/doacoes']);
+
+      });;
+
     }else{
       this.messageService.add({ severity: 'error', detail: 'Você precisa de uma conta para cadastrar uma doação' });
     }

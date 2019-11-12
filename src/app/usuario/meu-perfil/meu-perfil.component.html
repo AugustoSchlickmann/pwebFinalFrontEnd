@@ -103,10 +103,10 @@
                         <tr>
                           <td>{{feita.nome}}</td>
                           <td>{{feita.status}}</td>
-                         <td>
-                            <button pButton icon="pi pi-pencil" [routerLink]="['/doacao/nova',feita.id]" ></button>
-                            <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(feita)"></button>
-                        </td>
+                          <td >
+                            <button  pButton icon="pi pi-pencil" [routerLink]="['/doacao/nova',feita.id]" > </button>
+                            <button   pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(feita)"></button>
+                          </td>
                         </tr>
                       </ng-template>
 
@@ -120,19 +120,16 @@
                       <ng-template pTemplate="header" >
                           <tr>
                             <th>Nome</th>
-                            <th>Avaliação</th>
                             <th>Doador</th>
+                            <th>Visualizar</th>
                           </tr>
                        </ng-template>
 
                        <ng-template pTemplate="body" let-recebida>
                           <tr>
                             <td>{{recebida.nome}}</td>
-                            <td>{{recebida.votosPositivos}}</td>
-                           <td>
-                              <button pButton icon="pi pi-user"  [routerLink]="['/usuario/',recebida.doador.idUsuario]"></button>
-                              {{recebida.doador.nomeCompleto}}
-                          </td>
+                            <td> <button pButton icon="pi pi-user"  [routerLink]="['/usuario/',recebida.doador.idUsuario]"></button> {{recebida.doador.nomeCompleto}}</td>
+                            <td> <button pButton icon="pi pi-search" [routerLink]="['/doacoes',recebida.id]" ></button> </td>
                           </tr>
                         </ng-template>
 

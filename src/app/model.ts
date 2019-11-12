@@ -30,8 +30,8 @@ export class Notificacao{
   conteudo:string;
   lida:boolean;
 
-  notificador:Usuario
-  notificado:Usuario
+  notificador:Usuario = new Usuario();
+  notificado:Usuario = new Usuario();
 }
 
 

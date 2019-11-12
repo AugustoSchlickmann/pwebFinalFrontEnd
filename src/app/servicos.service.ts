@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario} from './model';
+import { Usuario, Notificacao} from './model';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { reject } from 'q';
 
 
 @Injectable({
@@ -16,8 +15,9 @@ export class ServicosService {
     private rotaprogramatica:Router) { }
 
   usuarioURL = 'http://localhost:8090/usuarios';
-  logado:Usuario;
+  notificacaoURL = 'http://localhost:8090/notificacoes';
 
+  logado:Usuario;
 
 
   cadastrarUsuario(usuario: Usuario ): Promise<any>{
@@ -34,6 +34,10 @@ export class ServicosService {
     return this.http.get<Usuario>(this.usuarioURL+'/'+codigo).toPromise();
   }
 
+  buscarDoacoesFeitasDisponiveis(id:number):Promise<any>{
+    return this.http.get<any>(this.usuarioURL+'/'+id+'/doacoesfeitasdisponiveis').toPromise();
+  }
+
   buscarDoacoesFeitas(id:number):Promise<any>{
     return this.http.get<any>(this.usuarioURL+'/'+id+'/doacoesfeitas').toPromise();
   }
@@ -41,6 +45,28 @@ export class ServicosService {
   buscarDoacoesRecebidas(id:number):Promise<any>{
     return this.http.get<any>(this.usuarioURL+'/'+id+'/doacoesrecebidas').toPromise();
   }
+
+  buscarNotificacoes(id:number):Promise<any>{
+    return this.http.get<any>(this.usuarioURL+'/'+id+'/notificacoes').toPromise();
+  }
+
+
+  excluirNotificacao(id:number):Promise<void>{
+    return this.http.delete(this.notificacaoURL+'/'+id)
+    .toPromise()
+    .then(() => null);
+  }
+
+  adicionarNotificacao(notificacao: Notificacao): Promise<any>{
+    return this.http.post(this.notificacaoURL, notificacao)
+    .toPromise();
+  }
+
+  atualizarNotificacao(notificacao: Notificacao): Promise<any>{
+    return this.http.put(this.notificacaoURL+'/'+notificacao.id, notificacao)
+    .toPromise();
+  }
+
 
   login(senha:string): Promise<Usuario> {
     return this.http.get<Usuario>(this.usuarioURL+'/login/'+senha).toPromise();

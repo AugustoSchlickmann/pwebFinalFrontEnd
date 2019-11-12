@@ -6,7 +6,7 @@
 
             <div class="ui-g" style="text-align:center">
                 <div class="ui-g-12 ui-md-6  ui-lg-3">
-                  <p-dropdown [options]="categorias" [(ngModel)]="sortKey" placeholder="Ordenar Por" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                  <p-dropdown [options]="ordem" [(ngModel)]="sortKey" placeholder="Ordenar Por" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
                 </div>
                 <div class="ui-g-12 ui-md-6  ui-lg-3">
                   <input type="search" pInputText placeholder="Pesquisar por Nome" (keyup)="dv.filter($event.target.value, 'contains')">
@@ -38,7 +38,7 @@
             <p-panel [header]="doacao.nome" [style]="{'text-align':'center'}">
                 <img src="" width="100">
                 <div class="doacao-detail"> {{doacao.categoria}}</div>
-                <div class="doacao-detail"> {{doacao.doador.cidade}} - {{doacao.doador.estado}}</div>
+                <div class="doacao-detail"> {{doacao.doador.estado}} - {{doacao.doador.cidade}}</div>
                 <div class="ui-fluid" *ngIf="logado!=null"> <button pButton type="button" icon="pi pi-search" [routerLink]="['/doacoes/',doacao.id]" ></button>
                 </div>
                 <hr class="ui-widget-content" style="border-top:0">
@@ -61,6 +61,34 @@
       <div class="  ui-fluid">
         <button pButton  icon="pi pi-sign-in" (click)="login()"></button>
       </div>
+
+</p-dialog>
+
+<p-dialog header="Notificações " [(visible)]="mostrarNotificacoes" [modal]="false" [responsive]="true" [style]="{width: '800px','text-align':'center'}"
+[maximizable]="true" [baseZIndex]="10000" >
+
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
+
+<p-table [value]="notificacoes" [paginator]="true" [rows]="4" [responsive]="true">
+  <ng-template pTemplate="header" >
+      <tr>
+        <th>ID</th>
+        <th>Conteúdo</th>
+        <th>Notificador</th>
+        <th>Excluir</th>
+      </tr>
+   </ng-template>
+
+   <ng-template pTemplate="body" let-noti>
+      <tr>
+        <td>{{noti.id}}</td>
+        <td>{{noti.conteudo}}</td>
+        <td> <button pButton icon="pi pi-user" [routerLink]="['/usuario/',noti.notificador.idUsuario]" ></button> {{noti.notificador.nomeCompleto}}</td>
+        <td> <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(noti)"></button></td>
+      </tr>
+    </ng-template>
+
+</p-table>
 
 </p-dialog>
 

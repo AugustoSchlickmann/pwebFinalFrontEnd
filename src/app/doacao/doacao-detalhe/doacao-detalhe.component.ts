@@ -1,7 +1,8 @@
+import { Notificacao } from './../../model';
 import { Component, OnInit } from '@angular/core';
 import { doacaoService } from '../doacaoService.service';
 import { Doacao } from '../modelos';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicosService } from 'src/app/servicos.service';
 
@@ -12,15 +13,18 @@ import { ServicosService } from 'src/app/servicos.service';
 })
 export class DoacaoDetalheComponent implements OnInit {
 
+  notificacao = new Notificacao();
   doacao = new Doacao();
   gosteiClicado:boolean=false;
   naogosteiClicado:boolean=false;
+  solicitada:boolean=false;
 
   constructor(private service: doacaoService,
     private messageService: MessageService,
     private rota: ActivatedRoute,
     private rotaprogramatica:Router,
-    private service2: ServicosService) { }
+    private service2: ServicosService,
+    private conf: ConfirmationService,) { }
 
   ngOnInit() {
     const codigoDoacao = this.rota.snapshot.params['id'];
@@ -64,6 +68,27 @@ export class DoacaoDetalheComponent implements OnInit {
       this.service.atualizarUsuario(this.doacao.doador);
 
 
+  }
+
+  confirmarSolicitacao(){
+    this.conf.confirm({
+      message: 'Enviar Pedido de Solicitação da Doação?',
+      accept: () => {
+        this.enviarSolicitacao();
+      }
+    });
+  }
+
+  enviarSolicitacao(){
+    this.notificacao.conteudo='Usuário fez o pedido de Solicitação de sua doação '+ this.doacao.nome
+    this.notificacao.notificador.idUsuario=this.service2.logado.idUsuario;
+    this.notificacao.notificado.idUsuario=this.doacao.doador.idUsuario;
+
+    this.service2.adicionarNotificacao(this.notificacao) .then(()=>{
+      this.messageService.add({severity:'success', summary:'Notificação Enviada!'});
+    });
+
+    this.solicitada=true;
   }
 
 }
