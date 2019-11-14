@@ -20,6 +20,7 @@ import { doacaoService } from './doacaoService.service';
 import { ServicosService } from '../servicos.service';
 import { DoacaoDetalheComponent } from './doacao-detalhe/doacao-detalhe.component';
 import {MenuModule} from 'primeng/menu';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
@@ -38,7 +39,7 @@ import {MenuModule} from 'primeng/menu';
     RouterModule,
     PanelModule,
     DropdownModule,
-    InputTextModule,
+    InputTextareaModule,
     PasswordModule,
     DialogModule,
     MenuModule,

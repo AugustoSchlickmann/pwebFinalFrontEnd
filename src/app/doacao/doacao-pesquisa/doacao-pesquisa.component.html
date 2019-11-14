@@ -72,19 +72,21 @@
 <p-table [value]="notificacoes" [paginator]="true" [rows]="4" [responsive]="true">
   <ng-template pTemplate="header" >
       <tr>
-        <th>ID</th>
+        <th style="width:80px">ID </th>
+        <th style="width:160px">Notificador</th>
         <th>Conteúdo</th>
-        <th>Notificador</th>
-        <th>Excluir</th>
+        <th style="width:80px">Excluir</th>
       </tr>
    </ng-template>
 
    <ng-template pTemplate="body" let-noti>
       <tr>
         <td>{{noti.id}}</td>
-        <td>{{noti.conteudo}}</td>
         <td> <button pButton icon="pi pi-user" [routerLink]="['/usuario/',noti.notificador.idUsuario]" ></button> {{noti.notificador.nomeCompleto}}</td>
+        <td>{{noti.conteudo}}</td>
         <td> <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(noti)"></button></td>
+
+
       </tr>
     </ng-template>
 

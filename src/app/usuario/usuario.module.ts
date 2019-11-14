@@ -23,6 +23,7 @@ import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.co
 import { ServicosService } from '../servicos.service';
 import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
 import { OutremPerfilComponent } from './outrem-perfil/outrem-perfil.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [UsuarioCadastroComponent, MeuPerfilComponent, OutremPerfilComponent],
@@ -45,7 +46,8 @@ import { OutremPerfilComponent } from './outrem-perfil/outrem-perfil.component';
     InputMaskModule,
     TableModule,
     CheckboxModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    InputTextareaModule,
   ],
   providers: [
     ServicosService,

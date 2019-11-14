@@ -74,7 +74,7 @@ export class ServicosService {
   }
 
   autenticar(senha:string){
-      this.login(senha).then((dados)=>{ this.logado=dados}) .then( ()=>{
+      this.login(senha).then((dados)=>{ this.logado=dados}).then( ()=>{
         if(this.logado!=null){
           this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.logado.nomeCompleto + ' Autenticado' });
           this.rotaprogramatica.navigate(['/usuario/meuperfil']);

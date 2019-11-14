@@ -15,9 +15,11 @@ export class DoacaoDetalheComponent implements OnInit {
 
   notificacao = new Notificacao();
   doacao = new Doacao();
+
   gosteiClicado:boolean=false;
   naogosteiClicado:boolean=false;
   solicitada:boolean=false;
+  minha:boolean=false;
 
   constructor(private service: doacaoService,
     private messageService: MessageService,
@@ -27,14 +29,22 @@ export class DoacaoDetalheComponent implements OnInit {
     private conf: ConfirmationService,) { }
 
   ngOnInit() {
-    const codigoDoacao = this.rota.snapshot.params['id'];
-    if(codigoDoacao){
-      this.carregarDoacao(codigoDoacao);
+    if(this.service2.logado==null){
+       this.rotaprogramatica.navigate(['/doacoes'])}
+    else{
+      const codigoDoacao = this.rota.snapshot.params['id'];
+      if(codigoDoacao){ this.carregarDoacao(codigoDoacao); }
     }
   }
 
   carregarDoacao(id:number){
-    this.service.buscarPorCodigo(id).then((data) => {this.doacao = data; } );
+    this.service.buscarPorCodigo(id).then((data) => {this.doacao = data; } ).then( ()=>{
+      if(this.doacao.doador.idUsuario==this.service2.logado.idUsuario){
+       this.minha=true;
+       this.gosteiClicado=true;
+       this.naogosteiClicado=true;
+      } });
+
   }
 
   gostei(){
@@ -50,6 +60,8 @@ export class DoacaoDetalheComponent implements OnInit {
 
     this.service.alterar(this.doacao);
     this.service.atualizarUsuario(this.doacao.doador);
+
+    console.log('Data: '+Date.now)
 
   }
 
@@ -85,10 +97,28 @@ export class DoacaoDetalheComponent implements OnInit {
     this.notificacao.notificado.idUsuario=this.doacao.doador.idUsuario;
 
     this.service2.adicionarNotificacao(this.notificacao) .then(()=>{
-      this.messageService.add({severity:'success', summary:'Notificação Enviada!'});
+      this.messageService.add({severity:'success', summary:'Solicitação Enviada!'});
     });
 
     this.solicitada=true;
+  }
+
+  confirmarExclusao(doacao:Doacao){
+    this.conf.confirm({
+      message: 'Tem certeza que deseja excluir '+doacao.nome+'?',
+      accept: () => {
+        this.excluir(doacao);
+      }
+    });
+  }
+
+  excluir(doacao: Doacao){
+    this.service.excluirDoacao(doacao.id)
+    .then(()=>{
+      this.messageService.add({severity:'success', summary:'Exclusão', detail:'Doação '+doacao.nome+' excluída'});
+    }).then( ()=>{
+      this.rotaprogramatica.navigate(['/usuario/meuperfil']);
+    })
   }
 
 }

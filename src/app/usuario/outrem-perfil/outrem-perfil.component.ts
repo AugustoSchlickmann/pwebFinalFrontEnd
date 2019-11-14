@@ -21,6 +21,10 @@ export class OutremPerfilComponent implements OnInit {
 
   notificacao : Notificacao = new Notificacao();
 
+  digitar: boolean = false;
+
+  mensagem:string;
+
   constructor(private service: ServicosService,
     private messageService: MessageService,
     private rota: ActivatedRoute,
@@ -33,32 +37,27 @@ export class OutremPerfilComponent implements OnInit {
     const codigoUsuario = this.rota.snapshot.params['id'];
     if(codigoUsuario){this.carregarUsuario(codigoUsuario);
     }
-
   }
 
   carregarUsuario(id:number){
     if(id==this.service.logado.idUsuario){
        this.rotaprogramatica.navigate(['/usuario/meuperfil']);
     }else{
-    this.service.buscarUsuarioPorCodigo(id).then((data) => {this.outrem = data;});
-    this.service.buscarDoacoesFeitas(id).then((feitas) => {this.outrem.feitas=feitas});
-    this.service.buscarDoacoesRecebidas(id).then((recebidas) => {this.outrem.recebidas=recebidas});
-    this.service.buscarDoacoesFeitasDisponiveis(this.service.logado.idUsuario).then((dados) => {this.doacoes=dados});
-    }
-
+    this.service.buscarUsuarioPorCodigo(id).then((data) => {this.outrem = data;})
+    .then(() => {this.service.buscarDoacoesFeitas(id).then((feitas) => {this.outrem.feitas = feitas})
+    .then(() => {this.service.buscarDoacoesRecebidas(id).then((recebidas) => {this.outrem.recebidas = recebidas})
+    })})}
   }
 
   mostrarDoacoes(){
-    this.service.buscarDoacoesFeitasDisponiveis(this.service.logado.idUsuario).then((dados) => {this.doacoes=dados});
-    this.mostrar = true;
+    this.service.buscarDoacoesFeitasDisponiveis(this.service.logado.idUsuario).then((dados) => {this.doacoes=dados})
+    .then(() => {this.mostrar = true});
   }
 
   confirmarEnvio(doacao:Doacao){
     this.conf.confirm({
       message: 'Tem certeza que deseja enviar sua Doação ' +doacao.nome+ ' para ' + this.outrem.nomeCompleto+'?',
-      accept: () => {
-        this.enviarDoacao(doacao);
-      }
+      accept: () => {this.enviarDoacao(doacao)}
     });
   }
 
@@ -69,10 +68,22 @@ export class OutremPerfilComponent implements OnInit {
     this.notificacao.notificado.idUsuario=this.outrem.idUsuario;
     this.notificacao.notificador.idUsuario=this.service.logado.idUsuario;
     this.service.adicionarNotificacao(this.notificacao);
-    this.doaService.alterar(doacao);
+    this.doaService.alterar(doacao).then(() => {
     this.messageService.add({severity:'success', summary:'Doação', detail: doacao.nome+' Enviada com Sucesso'});
     this.mostrar=false;
     this.service.buscarDoacoesRecebidas(this.outrem.idUsuario).then((recebidas) => {this.outrem.recebidas=recebidas});
+    });
+  }
+
+  enviarMensagem(){
+    this.notificacao.conteudo=this.mensagem;
+    this.notificacao.notificado.idUsuario=this.outrem.idUsuario;
+    this.notificacao.notificador.idUsuario=this.service.logado.idUsuario;
+    this.service.adicionarNotificacao(this.notificacao);
+    this.messageService.add({severity:'success', summary:'Mensagem Enviada!'});
+    this.digitar=false;
+    this.mensagem='';
+
   }
 
 }

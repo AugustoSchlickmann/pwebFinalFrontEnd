@@ -17,15 +17,17 @@ export class MeuPerfilComponent implements OnInit {
 
 
   constructor(private service:ServicosService,
-  private messageService: MessageService,
-  private rotaprogramatica:Router,
-  private conf: ConfirmationService,
-  private serviceDoacao:doacaoService) { }
+  private rotaprogramatica:Router
+  ) { }
 
   ngOnInit() {
-  this.eu = this.service.Usuariologado();
-  this.service.buscarDoacoesFeitas(this.eu.idUsuario).then((feitas)=>{this.eu.feitas=feitas});
-  this.service.buscarDoacoesRecebidas(this.eu.idUsuario).then((recebidas)=>{ this.eu.recebidas=recebidas});
+    if(this.service.logado==null){
+      this.rotaprogramatica.navigate(['/doacoes']);
+    }else{
+       this.eu = this.service.Usuariologado();
+       this.service.buscarDoacoesFeitas(this.eu.idUsuario).then((feitas)=>{this.eu.feitas=feitas});
+       this.service.buscarDoacoesRecebidas(this.eu.idUsuario).then((recebidas)=>{ this.eu.recebidas=recebidas});
+    }
   }
 
   logoff(){
@@ -33,21 +35,5 @@ export class MeuPerfilComponent implements OnInit {
     this.rotaprogramatica.navigate(['/doacoes']);
   }
 
-  confirmarExclusao(doacao:Doacao){
-    this.conf.confirm({
-      message: 'Tem certeza que deseja excluir '+doacao.nome+'?',
-      accept: () => {
-        this.excluir(doacao);
-      }
-    });
-  }
-
-  excluir(doacao: Doacao){
-    this.serviceDoacao.excluirDoacao(doacao.id)
-    .then(()=>{
-      this.service.buscarDoacoesFeitas(this.eu.idUsuario).then((feitas)=>{this.eu.feitas=feitas});
-      this.messageService.add({severity:'success', summary:'Exclusão', detail:'Doação '+doacao.nome+' excluída'});
-    });
-  }
 
 }

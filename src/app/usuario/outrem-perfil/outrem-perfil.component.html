@@ -75,7 +75,7 @@
           </div>
 
           <div class="ui-g-6">
-            <button pButton  label="Enviar Mensagem" icon="pi pi-bell" class=" boxButton"></button>
+            <button pButton  (click)="digitar=true" label="Enviar Mensagem" icon="pi pi-bell" class=" boxButton"></button>
           </div>
       </div>
 
@@ -89,7 +89,7 @@
                   <tr>
                     <th>Nome</th>
                     <th>Status</th>
-                    <th>Visualizar</th>
+                    <th style="width:100px">Visualizar</th>
                   </tr>
                </ng-template>
 
@@ -114,7 +114,7 @@
                     <tr>
                       <th>Nome</th>
                       <th>Doador</th>
-                      <th>Visualizar</th>
+                      <th style="width:100px">Visualizar</th>
                     </tr>
                  </ng-template>
 
@@ -129,6 +129,22 @@
             </p-table>
           </div>
   </div>
+
+
+
+  <p-dialog header="Digite a Mensagem" [(visible)]="digitar" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70"
+                  [baseZIndex]="10000" resizable="false">
+
+                  <div class="ui-g-12 ui-fluid">
+                  <textarea  maxlength="255" pInputTextarea autoResize="autoResize" name="mensagem" [(ngModel)]="mensagem" class="ui-fluid"></textarea>
+                  </div>
+
+               <p-footer>
+                <button type="button" pButton icon="pi pi-check" (click)="enviarMensagem()" label="Enviar"class="ui-button-success"></button>
+                <button type="button" pButton icon="pi pi-close" (click)="digitar=false" label="Cancelar" class="ui-button-secondary"></button>
+              </p-footer>
+  </p-dialog>
+
 </div>
 
 

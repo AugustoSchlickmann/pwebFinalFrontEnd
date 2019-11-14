@@ -1,4 +1,4 @@
-
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 
 <div class="container">
     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
@@ -31,12 +31,16 @@
 
             <div class="ui-g-12 ui-fluid">
               <label>Descrição</label>
-              <input pInputText type="text" name="descricao" [(ngModel)]="nova.descricao" #descricao="ngModel">
+              <textarea maxlength="255" pInputTextarea autoResize="autoResize" name="descricao" [(ngModel)]="nova.descricao" #descricao="ngModel"></textarea>
             </div>
 
 
-            <div class="ui-g-12">
-              <button pButton type="submit" label="Salvar Doação" [disabled]="f.invalid" class=" boxButton" ></button>
+            <div class="ui-g-6">
+              <button pButton type="submit" label="Salvar Doação"  icon="pi pi-check" [disabled]="f.invalid" class="ui-button-success" ></button>
+            </div>
+
+            <div class="ui-g-6" *ngIf="editando">
+              <button pButton type="button"  label="Cancelar Edição" icon="pi pi-times" class="ui-button-warning"  [routerLink]="['/doacoes/',nova.id]" ></button>
             </div>
 
       </div>
