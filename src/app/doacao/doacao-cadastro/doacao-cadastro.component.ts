@@ -18,6 +18,7 @@ export class DoacaoCadastroComponent implements OnInit {
 
 nova:Doacao=new Doacao();
 logado:Usuario;
+data = new Date();
 
 categorias=[
   {label:'Vestimenta', value:'Vestimenta'},
@@ -57,6 +58,11 @@ ngOnInit() {
   cadastrar(form: FormControl) {
 
     this.nova.doador.idUsuario=this.logado.idUsuario;
+    this.nova.dataInicio=this.data.toLocaleDateString("pt-PT" ,{
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric"
+  })
 
     this.service.adicionarDoacao(this.nova)
       .then(() => {

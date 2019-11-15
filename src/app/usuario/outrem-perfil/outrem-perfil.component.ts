@@ -25,6 +25,8 @@ export class OutremPerfilComponent implements OnInit {
 
   mensagem:string;
 
+  data = new Date();
+
   constructor(private service: ServicosService,
     private messageService: MessageService,
     private rota: ActivatedRoute,
@@ -64,6 +66,11 @@ export class OutremPerfilComponent implements OnInit {
   enviarDoacao(doacao:Doacao){
     doacao.status='Finalizada';
     doacao.recebedor=this.outrem;
+    doacao.dataFim=this.data.toLocaleDateString("pt-PT" ,{
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric"
+  })
     this.notificacao.conteudo=this.service.logado.nomeCompleto+' enviou a doação '+ doacao.nome+ ' para você <3'
     this.notificacao.notificado.idUsuario=this.outrem.idUsuario;
     this.notificacao.notificador.idUsuario=this.service.logado.idUsuario;

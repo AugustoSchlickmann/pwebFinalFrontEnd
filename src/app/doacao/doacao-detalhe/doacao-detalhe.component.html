@@ -14,6 +14,15 @@
 
             </div>
 
+            <div class="ui-g-12   ui-fluid">
+              <label>Cadastrada em: {{doacao.dataInicio}}</label>
+
+          </div>
+
+          <div class="ui-g-12 " *ngIf="doacao.recebedor!=null">
+            <label>Finalizada em: {{doacao.dataFim}}</label>
+           </div>
+
             <div class="ui-g-12 ">
                 <label>Doador
                 <button pButton label="{{doacao.doador.nomeCompleto}}"   icon="pi pi-user" class=" boxButton"
@@ -26,23 +35,20 @@
               <button pButton label="{{doacao.recebedor.nomeCompleto}}"   icon="pi pi-user" class=" boxButton"
               [routerLink]="['/usuario/',doacao.recebedor.idUsuario]" ></button>
                </label>
-          </div>
+            </div>
+
 
             <div class="ui-g-12  ui-fluid">
                 <label>Estado: {{doacao.doador.estado}}</label>
-
             </div>
 
             <div class="ui-g-12   ui-fluid">
                 <label>Cidade: {{doacao.doador.cidade}}</label>
-
             </div>
-
 
 
             <div class="ui-g-12 ui-fluid">
                 <label>Método do Frete: {{doacao.metodoFrete}}</label>
-
             </div>
 
 

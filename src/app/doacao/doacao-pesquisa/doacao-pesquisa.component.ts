@@ -22,10 +22,12 @@ export class DoacaoPesquisaComponent implements OnInit{
   displayDialog: boolean = false;
   mostrarNotificacoes: boolean = false;
 
+  nomeUsuario:string;
   senha:string;
   logado:Usuario=null;
 
   items: MenuItem[];
+
 
   constructor(  private service: doacaoService,
     private messageService: MessageService,
@@ -65,8 +67,7 @@ showDialog() {
 }
 
 login(){
-  this.service2.autenticar(this.senha);
-
+  this.service2.autenticar(this.nomeUsuario,this.senha);
   this.logado=this.service2.Usuariologado();
 }
 

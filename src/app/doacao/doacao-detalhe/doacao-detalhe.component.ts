@@ -61,8 +61,6 @@ export class DoacaoDetalheComponent implements OnInit {
     this.service.alterar(this.doacao);
     this.service.atualizarUsuario(this.doacao.doador);
 
-    console.log('Data: '+Date.now)
-
   }
 
   naogostei(){

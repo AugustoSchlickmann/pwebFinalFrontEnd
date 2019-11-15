@@ -68,13 +68,13 @@ export class ServicosService {
   }
 
 
-  login(senha:string): Promise<Usuario> {
-    return this.http.get<Usuario>(this.usuarioURL+'/login/'+senha).toPromise();
+  login(nomeUsuario:string,senha:string): Promise<Usuario> {
+    return this.http.get<Usuario>(this.usuarioURL+'/'+nomeUsuario+'/'+senha).toPromise();
 
   }
 
-  autenticar(senha:string){
-      this.login(senha).then((dados)=>{ this.logado=dados}).then( ()=>{
+  autenticar(nomeUsuario:string,senha:string){
+      this.login(nomeUsuario,senha).then((dados)=>{ this.logado=dados}).then( ()=>{
         if(this.logado!=null){
           this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.logado.nomeCompleto + ' Autenticado' });
           this.rotaprogramatica.navigate(['/usuario/meuperfil']);

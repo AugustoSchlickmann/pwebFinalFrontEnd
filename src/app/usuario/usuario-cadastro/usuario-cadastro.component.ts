@@ -71,7 +71,7 @@ export class UsuarioCadastroComponent implements OnInit {
       this.service.cadastrarUsuario(this.usuario).then(() => {
         this.messageService.add({ severity: 'success', detail: 'Usuario ' + this.usuario.nomeCompleto + ' Cadastrado' });
       }).then( ()=>{
-        this.service.autenticar(this.usuario.senha)})
+        this.service.autenticar(this.usuario.nomeUsuario,this.usuario.senha)})
 
     }else{
       this.messageService.add({ severity: 'error', detail: 'Senhas diferentes' });
